@@ -42,4 +42,23 @@ function problem002() {
     return sum
 }
 
-console.log(problem002())
+/*
+ * The prime factors of 13195 are 5, 7, 13 and 29.
+ * What is the largest prime factor of the number 600851475143 ?
+ */
+function problem003() {
+    primeFactors = []
+
+    num = 600851475143
+    numBuf = num
+    for (i = 2; numBuf > 1; i++) {
+        if (numBuf%i==0) {
+            primeFactors.push(i);
+            numBuf = numBuf/i
+        }
+    }
+
+    return Math.max(...primeFactors)
+}
+
+console.log(problem003())
