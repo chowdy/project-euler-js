@@ -1,5 +1,3 @@
-console.log("hello world")
-
 /*
  * If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
  * The sum of these multiples is 23.
@@ -64,7 +62,7 @@ function problem003() {
 
 /*
  * A palindromic number reads the same both ways.
- * The largest palindrome made from the product of two 2-digit numbersis 9009 = 91 × 99.
+ * The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
  *
  * Find the largest palindrome made from the product of two 3-digit numbers.
  */
@@ -92,4 +90,44 @@ function problem004() {
     return max
 }
 
-console.log(problem004())
+/*
+ * 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+ * What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+ */
+function problem005() {
+
+    function isValid(n)  {
+        for (var i = 1; i <= 20; i++) {
+            if (n % i != 0) {
+                return false
+            }
+        }
+        return true
+    }
+
+    num = 1
+    while (true) {
+        if (isValid(num)) {
+            return num
+        } else {
+            num += 1
+        }
+    }
+}
+
+/*
+ * The sum of the squares of the first ten natural numbers is,
+ * 1^2 + 2^2 + ... + 10^2 = 385
+ * The square of the sum of the first ten natural numbers is,
+ * (1 + 2 + ... + 10)^2 = 552 = 3025
+ *
+ * Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
+ *
+ * Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+ */
+function problem006() {
+    
+}
+
+console.log("project-euler-js")
+console.log(problem005())
