@@ -1,0 +1,7 @@
+{
+  "name": "project-euler-js",
+  "version": "0.0.1",
+  "dependencies": {
+    "get-primes": "^1.0.3"
+  }
+}
