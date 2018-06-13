@@ -126,8 +126,22 @@ function problem005() {
  * Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
  */
 function problem006() {
-    
+    function sumOfSquares(numbers) {
+        sum = 0
+        numbers.forEach((n) => { sum += n*n })
+        return sum
+    }
+
+    function squareOfSum(numbers) {
+        sum = 0
+        numbers.forEach((n) => { sum += n })
+        return sum * sum
+    }
+
+    numbers = [...Array(101).keys()];
+
+    return squareOfSum(numbers) - sumOfSquares(numbers)
 }
 
 console.log("project-euler-js")
-console.log(problem005())
+console.log(problem006())
