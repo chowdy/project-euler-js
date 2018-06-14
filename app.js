@@ -215,5 +215,13 @@ function problem009() {
     }
 }
 
+/*
+ * The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+ * Find the sum of all the primes below two million.
+ */
+function problem010() {
+    return getPrimes(2000000).reduce((m,i) => { return m + i })
+}
+
 console.log("project-euler-js")
-console.log(problem009())
+console.log(problem010())
