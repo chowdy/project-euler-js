@@ -207,7 +207,7 @@ function problem009() {
     for (c = 1; c < ABC_SUM; c++) {
         for (b = 1; b < c; b++) {
             for (a = 1; a < b; a++) {
-                if ((a*a + b*b) == c*c && (a+b+c) == 1000) {
+                if ((a*a + b*b) == c*c && (a+b+c) == ABC_SUM) {
                     return a*b*c
                 }
             }
