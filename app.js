@@ -359,7 +359,7 @@ function problem013() {
  */
 function problem014() {
     longestChain = []
-    for (number = 1; number < 1000000; number++) {//number < 1000000; number++) {
+    for (number = 1; number < 1000000; number++) {
         chain = []
         n = number
         while (n) {
@@ -379,7 +379,91 @@ function problem014() {
     return longestChain[0]
 }
 
-PROBLEM = problem014
+// TODO: Me
+function problem015() {}
+
+/*
+ * 2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+ * What is the sum of the digits of the number 2^1000?
+ */
+function problem016() {
+    return (2n ** 1000n).toString().split("").reduce((m,i) => { return m + parseInt(i) }, 0)
+}
+
+/*
+ * If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19
+ * letters used in total.
+ * If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+ *
+ * NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115
+ * (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with
+ * British usage.
+ */
+function problem017() {
+
+    NUM_WORDS = {
+        ones: [ 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'],
+        teens: [ 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen' ],
+        tens: [ 'zero', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety' ],
+    }
+
+    function numToEng(n) {
+
+        nBuf = n
+        numString = ""
+
+        // thousands
+        if (nBuf >= 1000) {
+            thousands = parseInt(n / 1000)
+            thousandsWord = NUM_WORDS.ones[thousands]
+            numString += thousandsWord + "thousand"
+            nBuf -= (thousands * 1000)
+        }
+
+        // hundreds
+        if (nBuf >= 100) {
+            hundreds = parseInt(nBuf / 100)
+            hundredsWord = NUM_WORDS.ones[hundreds]
+            numString += hundredsWord + "hundred"
+            nBuf -= (hundreds * 100)
+
+            if (nBuf > 0) {
+                numString += "and"
+            }
+        }
+
+        // tens
+        if (nBuf >= 10) {
+            tens = parseInt(nBuf / 10)
+
+            // teens
+            if (nBuf < 20)  {
+                numString += NUM_WORDS.teens[nBuf - 10]
+                nBuf -= nBuf
+            } else {
+                tensWord = NUM_WORDS.tens[tens]
+                numString += tensWord
+                nBuf -= (tens * 10)
+            }
+        }
+
+        // ones
+        if (nBuf > 0) {
+            numString += NUM_WORDS.ones[nBuf]
+            nBuf = 0
+        }
+
+        return numString
+
+    }
+    
+    numbers = [...Array(1001).keys()]
+    numbers.shift()
+    numbers = numbers.map((i) => { return numToEng(i) }).map((i) => { return i.length }).reduce((m,i) => { return m + i })
+    return numbers
+}
+
+PROBLEM = problem017
 console.log("problem:  " + PROBLEM.name)
 start = Date.now()
 console.log("solution: " + PROBLEM())
