@@ -456,14 +456,36 @@ function problem017() {
         return numString
 
     }
-    
+
     numbers = [...Array(1001).keys()]
     numbers.shift()
     numbers = numbers.map((i) => { return numToEng(i) }).map((i) => { return i.length }).reduce((m,i) => { return m + i })
     return numbers
 }
 
-PROBLEM = problem017
+// TODO: Me
+function problem018() {}
+
+// TODO: Me
+function problem019() { }
+
+/*
+ * n! means n × (n − 1) × ... × 3 × 2 × 1
+ * For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+ * and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+ *
+ * Find the sum of the digits in the number 100!
+ */
+function problem020() {
+    number = 100n
+    fact = 1n
+    for (i = number; i > 0; i--) {
+        fact = fact * i
+    }
+    return fact.toString().split("").map((s) => { return parseInt(s) }).reduce((m,i) => { return m + i })
+}
+
+PROBLEM = problem020
 console.log("problem:  " + PROBLEM.name)
 start = Date.now()
 console.log("solution: " + PROBLEM())
