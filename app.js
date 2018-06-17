@@ -498,7 +498,7 @@ function problem020() {
  * digit, is part of an eight prime value family.
  */
 function problem051() {
-    
+
     function getAllPrimesOfLengthN(n) {
         return getPrimes(10 ** n).filter((p) => { return p > (10**(n-1) - 1) })
     }
@@ -569,7 +569,8 @@ function problem051() {
 
 }
 
-PROBLEM = problem051
+//PROBLEM = problem051
+PROBLEM = require("./problem089")
 console.log("function: " + PROBLEM.name + "()")
 start = Date.now()
 console.log("solution: " + PROBLEM())
