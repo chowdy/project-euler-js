@@ -1,4 +1,5 @@
 const getPrimes = require('get-primes')
+const isPrime = require('is-prime')
 
 // This is used for debugging. "Ugh. Is that 72 million? or 7.2 billion?"
 const approx = require('approximate-number')
@@ -485,8 +486,91 @@ function problem020() {
     return fact.toString().split("").map((s) => { return parseInt(s) }).reduce((m,i) => { return m + i })
 }
 
-PROBLEM = problem020
-console.log("problem:  " + PROBLEM.name)
+/*
+ * By replacing the 1st digit of the 2-digit number *3, it turns out that six of the nine possible values:
+ * 13, 23, 43, 53, 73, and 83, are all prime.
+ *
+ * By replacing the 3rd and 4th digits of 56**3 with the same digit, this 5-digit number is the first example having
+ * seven primes among the ten generated numbers, yielding the family: 56003, 56113, 56333, 56443, 56663, 56773,
+ * and 56993. Consequently 56003, being the first member of this family, is the smallest prime with this property.
+ *
+ * Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same
+ * digit, is part of an eight prime value family.
+ */
+function problem051() {
+    
+    function getAllPrimesOfLengthN(n) {
+        return getPrimes(10 ** n).filter((p) => { return p > (10**(n-1) - 1) })
+    }
+
+    function getAllMasksForNumDigits(numDigits) {
+        masks = []
+        maxMask = parseInt(Array(numDigits).fill(1).join(""), 2) - 1
+        for (m = maxMask; m > 0; m--) {
+            maskBinary = m.toString(2)
+            while (maskBinary.length < numDigits) {
+                maskBinary = "0" + maskBinary
+            }
+            masks.push(maskBinary)
+        }
+        return masks
+    }
+
+    function applyMask(number, mask) {
+        numString = number.toString()
+        maskString = mask.toString()
+        numMasked = ""
+        mask.toString().split("").forEach((i, idx) => {
+            if (i == "1") {
+                numMasked += "*"
+            } else {
+                numMasked += numString.charAt(idx)
+            }
+        })
+        return numMasked
+    }
+
+    function getAllPossibilitiesForMaskedNum(masked) {
+        poss = []
+        misses = 0
+        for (i = 0; i < 10 && misses < 99; i++) {
+            demasked = masked.replace(/\*/g, i)
+            num = parseInt(demasked)
+            if (num && isPrime(num) && num.toString().length == masked.length) {
+                poss.push(num)
+            } else {
+                misses++
+            }
+        }
+        return poss
+    }
+
+    max = 0
+    answer = undefined
+    SEEKING = 8
+    answerFound = false
+    for (len = 2; true; len++) {
+        allPrimes = getAllPrimesOfLengthN(len)
+        allMasks = getAllMasksForNumDigits(len)
+        if (answerFound) { return answer }
+        allPrimes.forEach((p) => {
+            if (answerFound) { return }
+            allMasks.forEach((m) => {
+                if (answerFound) { return }
+                allPossibilities = getAllPossibilitiesForMaskedNum(applyMask(p, m), allPrimes)
+                if (allPossibilities.length > max) {
+                    max = allPossibilities.length
+                    answer = Math.min(...allPossibilities)
+                    if (max >= SEEKING) { answerFound = true }
+                }
+            })
+        })
+    }
+
+}
+
+PROBLEM = problem051
+console.log("function: " + PROBLEM.name + "()")
 start = Date.now()
 console.log("solution: " + PROBLEM())
 console.log("took:     " + duration.fmt(Date.now() - start))
