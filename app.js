@@ -262,7 +262,7 @@ function problem011() {
     max = 0
     for (i = 0; i < grid.length; i++) {
         for (j = 0; j < grid[i].length; j++) {
-            trips = []
+            triples = []
             directions.forEach((direction) => {
                 trip = []
                 for (len = 0; len < ADJACENT_LENGTH; len++) {
@@ -276,11 +276,11 @@ function problem011() {
                     }
                 }
                 if (trip.length == ADJACENT_LENGTH) {
-                    trips.push(trip)
+                    triples.push(trip)
                 }
             })
 
-            tripProds = trips.map((trip) => {
+            tripProds = triples.map((trip) => {
                 return trip.reduce((m,i) => { return m * i }, 1)
             })
             localMax = Math.max(...tripProds)
@@ -570,7 +570,7 @@ function problem051() {
 }
 
 //PROBLEM = problem051
-PROBLEM = require("./problem089")
+PROBLEM = require("./problem054")
 console.log("function: " + PROBLEM.name + "()")
 start = Date.now()
 console.log("solution: " + PROBLEM())
