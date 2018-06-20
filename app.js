@@ -570,7 +570,7 @@ function problem051() {
 }
 
 //PROBLEM = problem051
-PROBLEM = require("./problem054")
+PROBLEM = require("./problem062")
 console.log("function: " + PROBLEM.name + "()")
 start = Date.now()
 console.log("solution: " + PROBLEM())
